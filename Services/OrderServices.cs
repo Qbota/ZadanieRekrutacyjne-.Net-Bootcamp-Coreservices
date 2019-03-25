@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -10,18 +12,23 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.XPath;
 using ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Models;
+using ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools;
 
 namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
 {
     public class OrderServices : IOrderServices
     {
-        private List<Order> _orders;
-        private List<string> _pathlist;
+        private readonly List<Order> _orders;
+        private readonly List<string> _pathlist;
 
         public OrderServices(string path)
         {
             _pathlist = ReadAllPathsFromTxt(path);
             _orders = ParseFilesToOrderList();
+            foreach(var order in _orders)
+            {
+                Console.WriteLine($"{order.ClientId} {order.RequestId} {order.Name} {order.Quantity} {order.Price} ");
+            }
             Console.ReadKey();
         }
 
@@ -52,49 +59,19 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
                 {
                     if (path.Contains(".xml"))
                     {
-                        list.AddRange(ParseFromXml(path));
+                        list.AddRange(XmlParser.Parse(path));
                     }
                     else if (path.Contains(".json"))
                     {
-                        list.AddRange(ParseFromJson(path));
+                        list.AddRange(JsonParser.Parse(path));
                     }
                     else if (path.Contains(".csv"))
                     {
-                        list.AddRange(ParseFromCsv(path));
+                        list.AddRange(CsvParser.Parse(path));
                     }
                 }
             }
             return list;
-        }
-        
-        private List<Order> ParseFromCsv(string path)
-        {
-            return new List<Order>();
-        }
-
-        private List<Order> ParseFromJson(string path)
-        {
-            return new List<Order>();
-        }
-
-        private List<Order> ParseFromXml(string path)
-        {
-            var list = new List<Order>();
-            var doc = new XmlDocument();
-            doc.LoadXml(String.Concat(File.ReadAllLines(path)));
-            foreach(XmlNode node in doc.DocumentElement)
-            {
-                var order = new Order();
-                order.ClientId = node["clientId"].InnerText;
-                order.RequestId = Int32.Parse(node["requestId"].InnerText);
-                order.Name = node["name"].InnerText;
-                order.Quantity = Int32.Parse(node["quantity"].InnerText);
-                order.Price = Double.Parse(node["price"].InnerText, CultureInfo.InvariantCulture);
-                list.Add(order);
-            }
-            return list;
-        }
-     
-        
+        }    
     }
 }

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Models
 {
-    class Orders
+    public class Orders
     {
+        public List<Order> requests { get; set; }
+        public int count { get; set; }
     }
 }
