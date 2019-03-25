@@ -10,6 +10,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Halo");
         }
     }
 }
