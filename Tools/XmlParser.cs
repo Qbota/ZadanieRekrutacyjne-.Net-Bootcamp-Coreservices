@@ -24,16 +24,31 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools
                     try
                     {
                         var order = new Order();
-                        order.ClientId = node["clientId"].InnerText;
+                        if(node["clientId"].InnerText.All(x => char.IsLetterOrDigit(x) && !char.IsWhiteSpace(x)) && node["clientId"].InnerText.Length <= 6)
+                        {
+                            order.ClientId = node["clientId"].InnerText;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Blad w pliku Xml: ClientId ma zly format: {node["clientId"].InnerText}");
+                        }
                         order.RequestId = long.Parse(node["requestId"].InnerText);
-                        order.Name = node["name"].InnerText;
+                        if(node["name"].InnerText.All(x => char.IsLetterOrDigit(x)) && node["name"].InnerText.Length < 255)
+                        {
+                            order.Name = node["name"].InnerText;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Blad w pliku Xml: Name ma zly format: {node["name"].InnerText}");
+                            
+                        }
                         order.Quantity = Int32.Parse(node["quantity"].InnerText);
                         order.Price = Double.Parse(node["price"].InnerText, CultureInfo.InvariantCulture);
                         list.Add(order);
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Blad w pliku xml " + e.Message);
+                        Console.WriteLine("Blad w pliku xml: uszkodzone dane " + e.Message);
                     }
                 }
             }
@@ -41,8 +56,6 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools
             {
                 Console.WriteLine("Blad wczytania pliku " + e.Message);
             }
-            
-
             return list;
         }
     }

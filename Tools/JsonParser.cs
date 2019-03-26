@@ -19,6 +19,19 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools
                 var json = reader.ReadToEnd();
                 list = JsonConvert.DeserializeObject<Orders>(json);
             }
+            foreach(var order in list.requests)
+            {
+                if(!order.ClientId.All(x => char.IsLetterOrDigit(x) && !char.IsWhiteSpace(x)) || order.ClientId.Length > 6)
+                {
+                    Console.WriteLine($"Blad w pliku Json: ClientId ma zly format: {order.ClientId}");
+                    order.ClientId = null;
+                }
+                if(!order.Name.All(x => char.IsLetterOrDigit(x)) || order.Name.Length > 255)
+                {
+                    Console.WriteLine($"Blad w pliku Json: Name ma zly format: {order.Name}");
+                    order.Name = null;
+                }
+            }
             return list.requests;
         }
     }

@@ -1,3 +1,0 @@
-C:\Users\kubac\source\repos\ZadanieRekrutacyjne-.Net-Bootcamp-Coreservices\Data\csv_data.csv
-C:\Users\kubac\source\repos\ZadanieRekrutacyjne-.Net-Bootcamp-Coreservices\Data\json_data.json
-C:\Users\kubac\source\repos\ZadanieRekrutacyjne-.Net-Bootcamp-Coreservices\Data\xml_data.xml

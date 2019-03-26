@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices
         static void Main(string[] args)
         {
             var path = GetPath();
-            if(path != null)
+            if(path != "")
             {
                 var oc = new OrderController(new OrderServices(path));
             }
@@ -21,8 +22,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices
         private static string GetPath()
         {
             Console.WriteLine("Prosze podac sciezke do pliku ze sciezkami do plikow csv/xml/json");
-            //var path = Console.ReadLine();
-            var path = @"C:\Users\kubac\source\repos\ZadanieRekrutacyjne-.Net-Bootcamp-Coreservices\paths.txt";
+            var path = Console.ReadLine();
             return path;
         }
     }

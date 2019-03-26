@@ -41,7 +41,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
             var list = new List<Order>();
             foreach (var path in _pathlist)
             {
-                if (path != null)
+                if (path != null && File.Exists(path))
                 {
                     if (path.Contains(".xml"))
                     {
@@ -74,6 +74,8 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
 
         public double GetAverageCost() => _orders.Sum(x => x.Price) / _orders.Count();
 
+        public List<Order> GetOrdersBetweenPrices(double min, double max) => _orders.Where(x => x.Price >= min && x.Price < max).ToList();
+
         public double GetAverageCost(string clientId)
         {
             return _orders
@@ -83,5 +85,23 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
         }
 
 
+        public void GetOrdersGroupedByName()
+        {
+           var list = _orders.GroupBy(x => x.Name).Select(y => new { Name = y.Key, Quantity = y.Count() });
+           foreach(var item in list)
+            {
+                Console.WriteLine($"{item.Name} {item.Quantity}");
+            }
+        }
+
+
+        public void GetOrdersGroupedByName(string clientId)
+        {
+            var list = _orders.Where(x => x.ClientId == clientId).GroupBy(x => x.Name).Select(y => new { Name = y.Key, Quantity = y.Count() });
+            foreach (var item in list)
+            {
+                Console.WriteLine($"{item.Name} {item.Quantity}");
+            }
+        }
     }
 }

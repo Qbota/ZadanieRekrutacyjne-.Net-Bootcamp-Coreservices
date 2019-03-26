@@ -17,5 +17,8 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
         double GetTotalCost(string clientId);
         double GetAverageCost();
         double GetAverageCost(string clientId);
+        List<Order> GetOrdersBetweenPrices(double min, double max);
+        void GetOrdersGroupedByName();
+        void GetOrdersGroupedByName(string clientId);
     }
 }

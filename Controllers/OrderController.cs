@@ -52,10 +52,14 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Controllers
                         _menu.PresentData(_services.GetAverageCost(_menu.GetStringInput()));
                         break;
                     case 9:
+                        _services.GetOrdersGroupedByName();
                         break;
                     case 10:
+                        _services.GetOrdersGroupedByName(_menu.GetStringInput());
                         break;
                     case 11:
+                        _menu.MinMaxInfo();
+                        _menu.PresentData(_services.GetOrdersBetweenPrices(_menu.GetDoubleInput(), _menu.GetDoubleInput()));
                         break;
                     case 12:
                         running = false;

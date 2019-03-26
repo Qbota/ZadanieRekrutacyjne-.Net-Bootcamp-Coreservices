@@ -28,11 +28,18 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.View
         }
         public void PresentData(List<Order> orders)
         {
-            Console.WriteLine("ClientId    RequestId    Name        Quantity    Price");
-            foreach (var order in orders)
+            if (orders.Count != 0)
             {
-                Console.WriteLine($"{order.ClientId}           {order.RequestId}            {order.Name}       {order.Quantity}           {order.Price} ");
+                Console.WriteLine("ClientId, RequestId, Name, Quantity, Price");
+                Console.WriteLine("");
+                foreach (var order in orders)
+                {
+                    Console.WriteLine($"{order.ClientId} {order.RequestId} {order.Name} {order.Quantity} {order.Price} ");
+                }
             }
+            else
+                Console.WriteLine("Brak danych do wyswietlenia");
+            
         }
         public void PresentData(int number) => Console.WriteLine($"Wynik operacji to: {number}");
         public void PresentData(double number) => Console.WriteLine($"Wynik operacji to: {number}");
@@ -69,6 +76,36 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.View
                     choice = 0;
                 }
                 else if (choice > choiceNumber || choice < 1)
+                {
+                    Console.WriteLine("Wpisano niepoprawna wartosc");
+                    choice = 0;
+                }
+                else
+                {
+                    return choice;
+                }
+            }
+            return 0;
+        }
+
+        public void MinMaxInfo() => Console.WriteLine("Prosze podac dwie liczby: najpierw dolna granica zakresu, a potem gorna");
+        public double GetDoubleInput()
+        {
+            Console.WriteLine("Dokonaj wyboru poprzez wpisanie liczby zmiennoprzecinkowej. Decyzcje zatwierdz enterem");
+            var input = Console.ReadLine();
+            if (!double.TryParse(input, out var choice))
+            {
+                Console.WriteLine("Wpisano niepoprawna wartosc");
+                choice = 0;
+            }
+            else
+            {
+                return choice;
+            }
+            while (choice == 0)
+            {
+                input = Console.ReadLine();
+                if (!double.TryParse(input, out choice))
                 {
                     Console.WriteLine("Wpisano niepoprawna wartosc");
                     choice = 0;
