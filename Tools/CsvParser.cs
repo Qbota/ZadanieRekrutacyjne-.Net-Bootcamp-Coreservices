@@ -22,7 +22,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools
                     var line = reader.ReadLine().Split(',');
                     var order = new Order();
                     order.ClientId = line[0];
-                    order.RequestId = Int32.Parse(line[1]);
+                    order.RequestId = long.Parse(line[1]);
                     order.Name = line[2];
                     order.Quantity = Int32.Parse(line[3]);
                     order.Price = Double.Parse(line[4], CultureInfo.InvariantCulture);

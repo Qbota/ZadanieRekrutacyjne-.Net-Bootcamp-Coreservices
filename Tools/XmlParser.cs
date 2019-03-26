@@ -19,21 +19,30 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools
             try
             {
                 doc.LoadXml(string.Concat(File.ReadAllLines(path)));
+                foreach (XmlNode node in doc.DocumentElement)
+                {
+                    try
+                    {
+                        var order = new Order();
+                        order.ClientId = node["clientId"].InnerText;
+                        order.RequestId = long.Parse(node["requestId"].InnerText);
+                        order.Name = node["name"].InnerText;
+                        order.Quantity = Int32.Parse(node["quantity"].InnerText);
+                        order.Price = Double.Parse(node["price"].InnerText, CultureInfo.InvariantCulture);
+                        list.Add(order);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Blad w pliku xml " + e.Message);
+                    }
+                }
             }
             catch (Exception e)
             {
                 Console.WriteLine("Blad wczytania pliku " + e.Message);
             }
-            foreach (XmlNode node in doc.DocumentElement)
-            {
-                var order = new Order();
-                order.ClientId = node["clientId"].InnerText;
-                order.RequestId = Int32.Parse(node["requestId"].InnerText);
-                order.Name = node["name"].InnerText;
-                order.Quantity = Int32.Parse(node["quantity"].InnerText);
-                order.Price = Double.Parse(node["price"].InnerText, CultureInfo.InvariantCulture);
-                list.Add(order);
-            }
+            
+
             return list;
         }
     }

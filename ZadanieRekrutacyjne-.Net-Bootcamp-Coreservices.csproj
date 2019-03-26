@@ -56,13 +56,12 @@
     <Compile Include="Tools\CsvParser.cs" />
     <Compile Include="Tools\JsonParser.cs" />
     <Compile Include="Tools\XmlParser.cs" />
+    <Compile Include="View\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

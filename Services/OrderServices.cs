@@ -1,16 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.Serialization;
-using System.Xml.XPath;
 using ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Models;
 using ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Tools;
 
@@ -25,11 +16,6 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
         {
             _pathlist = ReadAllPathsFromTxt(path);
             _orders = ParseFilesToOrderList();
-            foreach(var order in _orders)
-            {
-                Console.WriteLine($"{order.ClientId} {order.RequestId} {order.Name} {order.Quantity} {order.Price} ");
-            }
-            Console.ReadKey();
         }
 
         private List<string> ReadAllPathsFromTxt(string path)
@@ -49,13 +35,13 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
             }
             return list;
         }
-        
+
         private List<Order> ParseFilesToOrderList()
         {
             var list = new List<Order>();
-            foreach(var path in _pathlist)
+            foreach (var path in _pathlist)
             {
-                if(path != null)
+                if (path != null)
                 {
                     if (path.Contains(".xml"))
                     {
@@ -72,6 +58,30 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
                 }
             }
             return list;
-        }    
+        }
+
+        public List<Order> GetOrders() => _orders;
+
+        public int GetOrdersCount() => _orders.Count();
+
+        public int GetOrdersCount(string clientId) => _orders.Where(x => x.ClientId == clientId).Count();
+
+        public List<Order> GetOrders(string clientId) => _orders.Where(x => x.ClientId == clientId).ToList();
+
+        public double GetTotalCost() => _orders.Sum(x => x.Price);
+
+        public double GetTotalCost(string clientId) => _orders.Where(x => x.ClientId == clientId).Sum(x => x.Price);
+
+        public double GetAverageCost() => _orders.Sum(x => x.Price) / _orders.Count();
+
+        public double GetAverageCost(string clientId)
+        {
+            return _orders
+                .Where(x => x.ClientId == clientId)
+                .Sum(x => x.Price)
+                / _orders.Where(x => x.ClientId == clientId).Count();
+        }
+
+
     }
 }
