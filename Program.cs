@@ -14,9 +14,14 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices
         static void Main(string[] args)
         {
             var path = GetPath();
-            if(path != "")
+            if(File.Exists(path))
             {
                 var oc = new OrderController(new OrderServices(path));
+            }
+            else
+            {
+                Console.WriteLine("Plik nie istnieje, nastapi zamkniecie programu");
+                Console.ReadKey();
             }
         }
         private static string GetPath()

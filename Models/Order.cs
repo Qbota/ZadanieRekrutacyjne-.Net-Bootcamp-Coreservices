@@ -20,5 +20,9 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Models
         public int Quantity { get; set; }
         [JsonProperty("price")]
         public double Price { get; set; }
+        public override string ToString()
+        {
+            return $"{ClientId},{RequestId},{Name},{Quantity},{Price}";
+        }
     }
 }

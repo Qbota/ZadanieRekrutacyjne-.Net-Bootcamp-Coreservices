@@ -20,5 +20,11 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.Services
         List<Order> GetOrdersBetweenPrices(double min, double max);
         void GetOrdersGroupedByName();
         void GetOrdersGroupedByName(string clientId);
+        List<Order> SortListByKey(List<Order> list, int key);
+        void SaveListToCsv(List<Order> list, string path);
+        void SaveOperationResultToCsv(double result, string path, int operationType);
+        void SaveOperationResultToCsv(double result, string path, int operationType, string clientId);
+        void SaveOrdersGroupedByName(string path);
+        void SaveOrdersGroupedByName(string path, string clientId);
     }
 }

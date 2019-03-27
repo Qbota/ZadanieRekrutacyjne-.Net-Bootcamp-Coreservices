@@ -14,7 +14,7 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.View
         {
             Console.WriteLine("Menu:");
             Console.WriteLine("1.Wyswietlanie liczby zamowien");
-            Console.WriteLine("2.Wyswietlanie zamowien dla klienta o podanym identyfikatorze");
+            Console.WriteLine("2.Wyswietlanie liczby zamowien dla klienta o podanym identyfikatorze");
             Console.WriteLine("3.Laczna kwota zamowien");
             Console.WriteLine("4.Laczna kwota zamowien dla klienta o podanym identyfikatorze");
             Console.WriteLine("5.Lista wszystkich zamowien");
@@ -41,8 +41,10 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.View
                 Console.WriteLine("Brak danych do wyswietlenia");
             
         }
+        public void SaveToFileMessage() => Console.WriteLine("Zapisac do pliku Csv? t/n. Jezeli tak prosze najpierw zadeklarowac chcec zapisu (t/n), a nastepnie podac sciezke, gdzie zapisac plik");
         public void PresentData(int number) => Console.WriteLine($"Wynik operacji to: {number}");
         public void PresentData(double number) => Console.WriteLine($"Wynik operacji to: {number}");
+        public void PickClientIdMessage() => Console.WriteLine("Prosze podac ClientId");
         public string GetStringInput()
         {
             Console.WriteLine("Prosze podac ciag znakow i zatwierdzic enterem");
@@ -89,6 +91,22 @@ namespace ZadanieRekrutacyjne_.Net_Bootcamp_Coreservices.View
         }
 
         public void MinMaxInfo() => Console.WriteLine("Prosze podac dwie liczby: najpierw dolna granica zakresu, a potem gorna");
+        public void SortingMessage() => Console.WriteLine("Posortowac? t/n. Jezeli tak prosze podac klucz, wedlug ktorego nastapi sortowanie");
+        public bool GetYesNoInput()
+        {
+            var input = Console.ReadLine();
+            while (input != "T" && input != "t" && input !="N" && input != "n")
+            {
+                Console.WriteLine("Podano zla wartosc");
+                input = Console.ReadLine();
+            }
+            if (input == "T" || input == "t")
+                return true;
+            else if (input == "N" || input == "n")
+                return false;
+            else
+                return false;
+        }
         public double GetDoubleInput()
         {
             Console.WriteLine("Dokonaj wyboru poprzez wpisanie liczby zmiennoprzecinkowej. Decyzcje zatwierdz enterem");
